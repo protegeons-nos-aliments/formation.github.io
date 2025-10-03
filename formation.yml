@@ -1,0 +1,168 @@
+name: Formation — Hygiène & salubrité (viandes)
+description: Questionnaire de validation des connaissances (score requis ≥ 80 %)
+title: "Formation — Hygiène & salubrité (viandes)"
+labels: ["formation"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Objectif :** répondez aux questions ci-dessous. Un score de **80 %** est requis pour valider la formation.
+        *Référez-vous à la politique interne. En cas de divergence, la politique interne prévaut.*
+
+  # Identification
+  - type: input
+    id: name
+    attributes:
+      label: Nom complet
+      placeholder: "Prénom Nom"
+    validations:
+      required: true
+  - type: input
+    id: email
+    attributes:
+      label: Courriel professionnel
+      placeholder: "prenom.nom@entreprise.com"
+    validations:
+      required: true
+  - type: input
+    id: site
+    attributes:
+      label: Site / Équipe
+      placeholder: "Ex. Montréal — Ligne A"
+    validations:
+      required: true
+
+  # Q1
+  - type: checkboxes
+    id: q1_handwash
+    attributes:
+      label: "Q1 — Quand faut-il se laver les mains ? (plusieurs réponses)"
+      options:
+        - label: "Avant de manipuler des aliments"
+        - label: "Après avoir touché de la viande crue"
+        - label: "Après être allé aux toilettes"
+        - label: "Après avoir touché son téléphone"
+    validations:
+      required: true
+
+  # Q2
+  - type: dropdown
+    id: q2_gloves
+    attributes:
+      label: "Q2 — Gants : que faire s’ils sont déchirés ou souillés ?"
+      options:
+        - "Continuer si ce n’est pas gênant"
+        - "Les essuyer avec un chiffon"
+        - "Les retirer et les remplacer immédiatement, puis se laver les mains"
+    validations:
+      required: true
+
+  # Q3
+  - type: dropdown
+    id: q3_separation
+    attributes:
+      label: "Q3 — Séparation cru/cuit"
+      options:
+        - "Utiliser du matériel/ustensiles distincts et planifier la production pour éviter les croisements"
+        - "Nettoyer sommairement entre deux usages suffit"
+        - "Aucune précaution particulière"
+    validations:
+      required: true
+
+  # Q4
+  - type: dropdown
+    id: q4_danger_zone
+    attributes:
+      label: "Q4 — La « zone dangereuse » de température est…"
+      options:
+        - "0–4 °C"
+        - "4–60 °C"
+        - "60–100 °C"
+    validations:
+      required: true
+
+  # Q5
+  - type: checkboxes
+    id: q5_thawing
+    attributes:
+      label: "Q5 — Décongélation sécurisée (plusieurs réponses)"
+      options:
+        - label: "Au réfrigérateur"
+        - label: "Sous eau froide courante (aliment emballé), puis cuisson immédiate"
+        - label: "Au micro-ondes, puis cuisson immédiate"
+        - label: "Sur le comptoir à température ambiante"
+    validations:
+      required: true
+
+  # Q6
+  - type: dropdown
+    id: q6_beef_min_temp
+    attributes:
+      label: "Q6 — Température interne minimale — bœuf haché"
+      options:
+        - "63 °C"
+        - "71 °C"
+        - "80 °C"
+    validations:
+      required: true
+
+  # Q7
+  - type: dropdown
+    id: q7_poultry_min_temp
+    attributes:
+      label: "Q7 — Température interne minimale — volaille (poulet/dinde)"
+      options:
+        - "68 °C"
+        - "72 °C"
+        - "74 °C"
+    validations:
+      required: true
+
+  # Q8
+  - type: checkboxes
+    id: q8_sanitation_steps
+    attributes:
+      label: "Q8 — Étapes de nettoyage/désinfection d’un équipement (plusieurs réponses)"
+      options:
+        - label: "Pré-rinçage/enlèvement des résidus"
+        - label: "Lavage avec détergent"
+        - label: "Rinçage à l’eau potable"
+        - label: "Désinfection selon la fiche technique"
+        - label: "Sauter le rinçage pour aller plus vite"
+    validations:
+      required: true
+
+  # Q9
+  - type: dropdown
+    id: q9_allergens
+    attributes:
+      label: "Q9 — Allergènes : bonne pratique"
+      options:
+        - "Produire les produits sans allergènes avant, nettoyer/vérifier, puis passer aux produits avec allergènes"
+        - "Mélanger les productions, on nettoie à la fin de la journée"
+        - "Éviter de signaler les allergènes pour ne pas inquiéter le client"
+    validations:
+      required: true
+
+  # Q10
+  - type: dropdown
+    id: q10_traceability
+    attributes:
+      label: "Q10 — Traçabilité en production"
+      options:
+        - "Enregistrer le numéro de lot, la date/heure et l’équipement utilisé sur les documents de production"
+        - "Prendre une photo pour WhatsApp"
+        - "Ne rien consigner si tout s’est bien passé"
+    validations:
+      required: true
+
+  # Attestation
+  - type: checkboxes
+    id: attestation
+    attributes:
+      label: "Attestation"
+      options:
+        - label: "Je certifie avoir répondu au questionnaire de bonne foi."
+    validations:
+      required: true
