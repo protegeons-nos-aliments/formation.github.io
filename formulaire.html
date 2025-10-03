@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Hygiène & salubrité — Questionnaire (viandes)</title>
+  <meta name="description" content="Questionnaire formation hygiène et salubrité des aliments — filière viandes.">
+
+  <style>
+    :root{
+      --bg:#0b1220; --surface:#0f172a; --text:#e5e7eb; --muted:#a3a3a3; --line:#273043;
+      --accent:#0ea5e9; --ok:#22c55e; --warn:#f59e0b; --err:#ef4444; --radius:14px;
+      color-scheme: light dark;
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#f6f8fb; --surface:#ffffff; --text:#111827; --muted:#6b7280; --line:#e5e7eb; --accent:#0b84f3; }
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(1200px 600px at 80% -100px, rgba(14,165,233,.18), transparent 60%),
+        radial-gradient(900px 500px at -100px 20%, rgba(34,197,94,.10), transparent 60%),
+        var(--bg);
+      color:var(--text);
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:980px;margin:0 auto;padding:28px 20px}
+    .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 10px 30px rgba(0,0,0,.12);overflow:hidden}
+    header.site{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.02),transparent)}
+    .lang-switch{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:999px;padding:2px}
+    .lang-switch a{display:inline-block;padding:8px 12px;border-radius:999px;font-weight:600;font-size:14px;color:var(--muted)}
+    .lang-switch a.active{background:var(--accent);color:#fff}
+
+    .hero{padding:26px 22px 10px}
+    .hero h1{margin:0 0 8px;font-size:28px;line-height:1.2}
+    .hero p{margin:0;color:var(--muted)}
+
+    .content{padding:0 22px 22px}
+    .panel{background:linear-gradient(180deg,rgba(255,255,255,.02),transparent);border:1px solid var(--line);border-radius:12px;padding:18px}
+    .steps{display:grid;grid-template-columns:1fr;gap:16px}
+    .progress{height:8px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden;margin:8px 0 18px}
+    .progress > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),#22c55e)}
+
+    fieldset{border:0;margin:0;padding:0}
+    legend{font-weight:700;margin:0 0 8px}
+    label{display:block;margin:10px 0 6px;font-weight:600}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width:720px){ .grid{grid-template-columns:1fr} }
+
+    input[type="text"],input[type="email"],select,textarea{
+      width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:transparent;color:var(--text)
+    }
+    textarea{min-height:110px;resize:vertical}
+    .q{margin:14px 0;padding:14px;border:1px solid var(--line);border-radius:10px}
+    .q legend{font-size:15px;margin-bottom:6px}
+    .hint{color:var(--muted);font-size:12px}
+    .options{display:grid;gap:8px;margin-top:8px}
+    .options label{display:flex;align-items:flex-start;gap:10px;font-weight:500}
+    .options input{margin-top:3px}
+
+    .actions{display:flex;justify-content:space-between;gap:12px;margin-top:14px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      padding:12px 18px;border-radius:10px;border:1px solid var(--accent);font-weight:700;cursor:pointer;
+      background:var(--accent);color:#fff;min-width:140px
+    }
+    .btn.secondary{background:transparent;color:var(--accent)}
+    .btn:disabled{opacity:.6;cursor:not-allowed}
+
+    .review{border:1px dashed var(--line);border-radius:10px;padding:14px;margin-top:10px}
+    .row{display:flex;gap:10px;align-items:center}
+    .row > b{min-width:150px;color:var(--muted);font-weight:600}
+
+    .toast{margin-top:14px;padding:12px;border-radius:10px;display:none}
+    .toast.ok{display:block;border:1px solid rgba(34,197,94,.35);background:rgba(34,197,94,.12);color:#0f5132}
+    .toast.err{display:block;border:1px solid rgba(239,68,68,.35);background:rgba(239,68,68,.12);color:#7f1d1d}
+
+    footer.site{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+    @media (max-width:640px){footer.site{flex-direction:column;align-items:flex-start}}
+    .visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="card" role="region" aria-labelledby="title">
+      <!-- Header -->
+      <header class="site">
+        <nav class="lang-switch" aria-label="Langue">
+          <a href="#fr" id="btn-fr">FR</a>
+          <a href="#en" id="btn-en">EN</a>
+        </nav>
+      </header>
+
+      <!-- Hero -->
+      <section class="hero">
+        <h1 id="title">Hygiène & salubrité — Questionnaire (viandes)</h1>
+        <p id="subtitle">Répondez selon les procédures et la politique interne.</p>
+      </section>
+
+      <div class="content">
+        <!-- Progression -->
+        <div class="progress" aria-label="Progression"><i id="progress-bar"></i></div>
+
+        <form id="quiz" class="steps" method="POST" action="ACTION_FORM_ENDPOINT" novalidate>
+          <!-- Anti-spam (honeypot) -->
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="visually-hidden" aria-hidden="true">
+
+          <!-- Étape 1 : Profil -->
+          <section id="step-1" class="panel" data-step="1" aria-labelledby="s1-title">
+            <h2 id="s1-title" style="margin:0 0 6px;">Profil</h2>
+            <p class="hint">Les champs marqués d’un astérisque (*) sont obligatoires.</p>
+
+            <div class="grid" style="margin-top:8px">
+              <div>
+                <label for="name">Nom complet *</label>
+                <input id="name" name="name" autocomplete="name" required>
+              </div>
+              <div>
+                <label for="email">Courriel professionnel *</label>
+                <input id="email" name="email" type="email" autocomplete="email" required>
+              </div>
+            </div>
+
+            <div class="grid">
+              <div>
+                <label for="department">Département *</label>
+                <select id="department" name="department" required>
+                  <option value="">— Sélectionner —</option>
+                  <option>Production</option>
+                  <option>Qualité</option>
+                  <option>RH</option>
+                  <option>IT</option>
+                </select>
+              </div>
+              <div>
+                <label for="site">Site / Équipe *</label>
+                <input id="site" name="site" required placeholder="Ex. Montréal — Ligne A">
+              </div>
+            </div>
+
+            <div class="actions">
+              <span></span>
+              <button type="button" class="btn" data-next>Suivant</button>
+            </div>
+          </section>
+
+          <!-- Étape 2 : Questions -->
+          <section id="step-2" class="panel" data-step="2" aria-labelledby="s2-title" hidden>
+            <h2 id="s2-title" style="margin:0 0 6px;">Questions</h2>
+
+            <!-- Q1 -->
+            <fieldset class="q">
+              <legend>Q1 — Quand faut-il se laver les mains ? <span class="hint">(plusieurs réponses)</span></legend>
+              <div class="options">
+                <label><input type="checkbox" name="q1" value="Avant de manipuler des aliments" required> Avant de manipuler des aliments</label>
+                <label><input type="checkbox" name="q1" value="Après avoir touché de la viande crue"> Après avoir touché de la viande crue</label>
+                <label><input type="checkbox" name="q1" value="Après être allé aux toilettes"> Après être allé aux toilettes</label>
+                <label><input type="checkbox" name="q1" value="Après avoir touché son téléphone"> Après avoir touché son téléphone</label>
+              </div>
+            </fieldset>
+
+            <!-- Q2 -->
+            <fieldset class="q">
+              <legend>Q2 — Gants : que faire s’ils sont déchirés ou souillés ?</legend>
+              <div class="options">
+                <label><input type="radio" name="q2" value="Continuer si ce n’est pas gênant" required> Continuer si ce n’est pas gênant</label>
+                <label><input type="radio" name="q2" value="Les essuyer avec un chiffon"> Les essuyer avec un chiffon</label>
+                <label><input type="radio" name="q2" value="Les retirer et les remplacer immédiatement, puis se laver les mains"> Les retirer et les remplacer immédiatement, puis se laver les mains</label>
+              </div>
+            </fieldset>
+
+            <!-- Q3 -->
+            <fieldset class="q">
+              <legend>Q3 — Séparation cru/cuit</legend>
+              <div class="options">
+                <label><input type="radio" name="q3" value="Utiliser du matériel/ustensiles distincts et planifier la production pour éviter les croisements" required> Utiliser du matériel/ustensiles distincts et planifier la production pour éviter les croisements</label>
+                <label><input type="radio" name="q3" value="Nettoyer sommairement entre deux usages suffit"> Nettoyer sommairement entre deux usages suffit</label>
+                <label><input type="radio" name="q3" value="Aucune précaution particulière"> Aucune précaution particulière</label>
+              </div>
+            </fieldset>
+
+            <!-- Q4 -->
+            <fieldset class="q">
+              <legend>Q4 — La « zone dangereuse » de température est…</legend>
+              <div class="options">
+                <label><input type="radio" name="q4" value="0–4 °C" required> 0–4 °C</label>
+                <label><input type="radio" name="q4" value="4–60 °C"> 4–60 °C</label>
+                <label><input type="radio" name="q4" value="60–100 °C"> 60–100 °C</label>
+              </div>
+            </fieldset>
+
+            <!-- Q5 -->
+            <fieldset class="q">
+              <legend>Q5 — Décongélation sécurisée <span class="hint">(plusieurs réponses)</span></legend>
+              <div class="options">
+                <label><input type="checkbox" name="q5" value="Au réfrigérateur" required> Au réfrigérateur</label>
+                <label><input type="checkbox" name="q5" value="Sous eau froide courante (aliment emballé), puis cuisson immédiate"> Sous eau froide courante (aliment emballé), puis cuisson immédiate</label>
+                <label><input type="checkbox" name="q5" value="Au micro-ondes, puis cuisson immédiate"> Au micro-ondes, puis cuisson immédiate</label>
+                <label><input type="checkbox" name="q5" value="Sur le comptoir à température ambiante"> Sur le comptoir à température ambiante</label>
+              </div>
+            </fieldset>
+
+            <!-- Q6 -->
+            <fieldset class="q">
+              <legend>Q6 — Température interne minimale — bœuf haché</legend>
+              <div class="options">
+                <label><input type="radio" name="q6" value="63 °C" required> 63 °C</label>
+                <label><input type="radio" name="q6" value="71 °C"> 71 °C</label>
+                <label><input type="radio" name="q6" value="80 °C"> 80 °C</label>
+              </div>
+            </fieldset>
+
+            <!-- Q7 -->
+            <fieldset class="q">
+              <legend>Q7 — Température interne minimale — volaille (poulet/dinde)</legend>
+              <div class="options">
+                <label><input type="radio" name="q7" value="68 °C" required> 68 °C</label>
+                <label><input type="radio" name="q7" value="72 °C"> 72 °C</label>
+                <label><input type="radio" name="q7" value="74 °C"> 74 °C</label>
+              </div>
+            </fieldset>
+
+            <!-- Q8 -->
+            <fieldset class="q">
+              <legend>Q8 — Étapes de nettoyage/désinfection d’un équipement <span class="hint">(plusieurs réponses)</span></legend>
+              <div class="options">
+                <label><input type="checkbox" name="q8" value="Pré-rinçage/enlèvement des résidus" required> Pré-rinçage/enlèvement des résidus</label>
+                <label><input type="checkbox" name="q8" value="Lavage avec détergent"> Lavage avec détergent</label>
+                <label><input type="checkbox" name="q8" value="Rinçage à l’eau potable"> Rinçage à l’eau potable</label>
+                <label><input type="checkbox" name="q8" value="Désinfection selon la fiche technique"> Désinfection selon la fiche technique</label>
+                <label><input type="checkbox" name="q8" value="Sauter le rinçage pour aller plus vite"> Sauter le rinçage pour aller plus vite</label>
+              </div>
+            </fieldset>
+
+            <!-- Q9 -->
+            <fieldset class="q">
+              <legend>Q9 — Allergènes : bonne pratique</legend>
+              <div class="options">
+                <label><input type="radio" name="q9" value="Produire les produits sans allergènes avant, nettoyer/vérifier, puis passer aux produits avec allergènes" required> Produire les produits sans allergènes avant, nettoyer/vérifier, puis passer aux produits avec allergènes</label>
+                <label><input type="radio" name="q9" value="Mélanger les productions, on nettoie à la fin de la journée"> Mélanger les productions, on nettoie à la fin de la journée</label>
+                <label><input type="radio" name="q9" value="Éviter de signaler les allergènes pour ne pas inquiéter le client"> Éviter de signaler les allergènes pour ne pas inquiéter le client</label>
+              </div>
+            </fieldset>
+
+            <!-- Q10 -->
+            <fieldset class="q">
+              <legend>Q10 — Traçabilité en production</legend>
+              <div class="options">
+                <label><input type="radio" name="q10" value="Enregistrer le numéro de lot, la date/heure et l’équipement utilisé sur les documents de production" required> Enregistrer le numéro de lot, la date/heure et l’équipement utilisé sur les documents de production</label>
+                <label><input type="radio" name="q10" value="Prendre une photo pour WhatsApp"> Prendre une photo pour WhatsApp</label>
+                <label><input type="radio" name="q10" value="Ne rien consigner si tout s’est bien passé"> Ne rien consigner si tout s’est bien passé</label>
+              </div>
+            </fieldset>
+
+            <div class="actions">
+              <button type="button" class="btn secondary" data-prev>Précédent</button>
+              <button type="button" class="btn" data-next>Suivant</button>
+            </div>
+          </section>
+
+          <!-- Étape 3 : Relecture & envoi -->
+          <section id="step-3" class="panel" data-step="3" aria-labelledby="s3-title" hidden>
+            <h2 id="s3-title" style="margin:0 0 6px;">Relecture & envoi</h2>
+            <div class="review" id="review"></div>
+
+            <div class="actions">
+              <button type="button" class="btn secondary" data-prev>Précédent</button>
+              <button type="submit" class="btn" id="submitBtn">Envoyer</button>
+            </div>
+
+            <div id="toast-ok"  class="toast ok"  role="status">Merci, votre réponse a été envoyée.</div>
+            <div id="toast-err" class="toast err" role="alert">Envoi impossible. Vérifiez la configuration de l’envoi et réessayez.</div>
+          </section>
+        </form>
+      </div>
+
+      <footer class="site">
+        <span>© <span id="year"></span> Votre organisation</span>
+        <span style="font-variant-numeric:tabular-nums">v1.0</span>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    // Lang switch UI (sans impact sur le contenu des questions FR)
+    const syncLang = ()=> {
+      const lang = (location.hash || '#fr');
+      document.querySelectorAll('.lang-switch a').forEach(a=>{
+        a.classList.toggle('active', a.getAttribute('href')===lang);
+      });
+      const title = document.getElementById('title');
+      const subtitle = document.getElementById('subtitle');
+      if (lang === '#en') {
+        title.textContent = 'Food hygiene & safety — Questionnaire (meat)';
+        subtitle.textContent = 'Answer according to internal procedures and policy.';
+        document.documentElement.lang = 'en';
+      } else {
+        title.textContent = 'Hygiène & salubrité — Questionnaire (viandes)';
+        subtitle.textContent = 'Répondez selon les procédures et la politique interne.';
+        document.documentElement.lang = 'fr';
+      }
+    };
+    syncLang(); window.addEventListener('hashchange', syncLang);
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Wizard simple
+    const form = document.getElementById('quiz');
+    const steps = [...document.querySelectorAll('[data-step]')];
+    const progress = document.getElementById('progress-bar');
+    let current = 1;
+
+    function showStep(n){
+      current = n;
+      steps.forEach(s => s.hidden = (+s.dataset.step !== n));
+      progress.style.width = ((n-1)/(steps.length-1))*100 + '%';
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    function stepValid(n){
+      if (n===1) {
+        return ['name','email','department','site'].every(id=>{
+          const el = document.getElementById(id);
+          return el && el.value && (el.type!=='email' || el.checkValidity());
+        });
+      }
+      if (n===2) {
+        // Q1, Q5, Q8: checkboxes → au moins 1
+        const cbGroups = [['q1'],['q5'],['q8']];
+        const rbGroups = ['q2','q3','q4','q6','q7','q9','q10'];
+        const cbOk = cbGroups.every(g=>{
+          const boxes = [...form.querySelectorAll(`input[name="${g[0]}"]`)];
+          return boxes.some(b=>b.checked);
+        });
+        const rbOk = rbGroups.every(nm=> !!form.querySelector(`input[name="${nm}"]:checked`));
+        return cbOk && rbOk;
+      }
+      return true;
+    }
+
+    document.querySelectorAll('[data-next]').forEach(b=>{
+      b.addEventListener('click', ()=>{
+        if (!stepValid(current)) { alert('Merci de compléter les champs requis.'); return; }
+        if (current===2) buildReview();
+        showStep(Math.min(current+1, steps.length));
+      });
+    });
+    document.querySelectorAll('[data-prev]').forEach(b=>{
+      b.addEventListener('click', ()=> showStep(Math.max(current-1,1)));
+    });
+
+    function field(name){
+      // Renvoie texte lisible pour review
+      const els = [...form.elements[name]];
+      if (!els || els.length===0) return '';
+      if (els[0] && (els[0].type==='checkbox' || els[0].type==='radio')){
+        return els.filter(e=>e.checked).map(e=>e.value).join(', ');
+      }
+      const el = form.elements[name];
+      return el && el.value ? el.value : '';
+    }
+
+    function reviewRow(label, val){
+      return `<div class="row"><b>${label}</b><span>${val || '—'}</span></div>`;
+    }
+
+    function buildReview(){
+      const out = [];
+      out.push('<h3 style="margin:0 0 8px">Vos informations</h3>');
+      out.push(reviewRow('Nom complet', field('name')));
+      out.push(reviewRow('Courriel', field('email')));
+      out.push(reviewRow('Département', field('department')));
+      out.push(reviewRow('Site / Équipe', field('site')));
+
+      out.push('<div class="divider"></div><h3 style="margin:0 0 8px">Vos réponses</h3>');
+      for (let i=1;i<=10;i++){
+        const key = 'q'+i;
+        out.push(reviewRow('Q'+i, field(key)));
+      }
+      document.getElementById('review').innerHTML = out.join('');
+    }
+
+    // Envoi
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      const ok = stepValid(2);
+      if (!ok) { alert('Merci de compléter les questions requises.'); showStep(2); return; }
+
+      const submitBtn = document.getElementById('submitBtn');
+      const toastOk = document.getElementById('toast-ok');
+      const toastErr = document.getElementById('toast-err');
+
+      submitBtn.disabled = true;
+      toastOk.style.display = 'none'; toastErr.style.display = 'none';
+
+      try {
+        const res = await fetch(form.action, { method:'POST', body:new FormData(form), headers:{'Accept':'application/json'} });
+        if (res.ok) {
+          toastOk.style.display = 'block';
+          form.reset();
+          showStep(1);
+        } else {
+          toastErr.style.display = 'block';
+        }
+      } catch (err) {
+        toastErr.style.display = 'block';
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+
+    // Initial step
+    showStep(1);
+  </script>
+</body>
+</html>
