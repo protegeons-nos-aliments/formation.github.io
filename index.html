@@ -3,55 +3,126 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Formation — Hygiène & salubrité (viandes)</title>
+  <title>Hygiène & salubrité — Filière viandes</title>
+  <meta name="description" content="Questionnaire de formation hygiène et salubrité (viandes).">
+
   <style>
-    :root { --bg:#f6f8fb; --card:#fff; --text:#111827; --muted:#6b7280; --line:#e5e7eb; --accent:#004bbb; }
-    *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
-    .wrap{max-width:860px;margin:40px auto;padding:0 16px}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(17,24,39,.05)}
-    header{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--line)}
-    header img{display:block;height:auto;max-height:36px}
-    .content{padding:24px}
-    h1{margin:0 0 8px;font-size:24px;line-height:1.25}
-    p{margin:0 0 12px;font-size:15px;line-height:1.55;color:#1f2937}
-    .muted{color:var(--muted);font-size:13px}
-    .cta{display:inline-block;margin-top:12px;background:var(--accent);color:#fff;border:1px solid var(--accent);
-         padding:12px 18px;border-radius:8px;font-weight:600;text-decoration:none}
-    .lang{margin-top:18px;font-size:13px;color:#6b7280}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-    @media (max-width:720px){ .grid{grid-template-columns:1fr} }
+    :root{
+      --bg:#0b1220; --surface:#0f172a; --text:#e5e7eb; --muted:#a3a3a3; --line:#273043; --accent:#0ea5e9; --radius:14px;
+      color-scheme: light dark;
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#f6f8fb; --surface:#ffffff; --text:#111827; --muted:#6b7280; --line:#e5e7eb; --accent:#0b84f3; }
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(1200px 600px at 80% -100px, rgba(14,165,233,.18), transparent 60%),
+        radial-gradient(900px 500px at -100px 20%, rgba(34,197,94,.10), transparent 60%),
+        var(--bg);
+      color:var(--text);
+    }
+    a{color:inherit;text-decoration:none}
+    .container{max-width:900px;margin:0 auto;padding:28px 20px}
+    .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 10px 30px rgba(0,0,0,.12);overflow:hidden}
+    header.site{display:flex;justify-content:flex-end;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.02),transparent)}
+    .lang-switch{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:999px;padding:2px}
+    .lang-switch a{display:inline-block;padding:8px 12px;border-radius:999px;font-weight:600;font-size:14px;color:var(--muted)}
+    .lang-switch a.active{background:var(--accent);color:#fff}
+    .hero{padding:28px 26px 8px}
+    .hero h1{margin:0 0 8px;font-size:28px;line-height:1.2;letter-spacing:.2px}
+    .hero p{margin:0;color:var(--muted)}
+    .panel{margin:0 26px 26px;background:linear-gradient(180deg,rgba(255,255,255,.02),transparent);border:1px solid var(--line);border-radius:12px;padding:18px}
+    .divider{height:1px;background:var(--line);margin:20px 0}
+    .list{margin:10px 0 0;padding:0 0 0 18px}
+    .list li{margin:6px 0}
+    .cta{display:inline-block;margin-top:14px;padding:12px 18px;border-radius:10px;font-weight:700;letter-spacing:.2px;background:var(--accent);border:1px solid var(--accent);color:#fff;transition:.2s transform ease}
+    .cta:hover{transform:translateY(-1px)}
+    /* Panneaux de langue (sans JS) */
+    .panel-lang{display:none}
+    .panel-lang:target{display:block}
+    /* FR par défaut si aucune ancre (#fr / #en) */
+    #fr:not(:target) ~ #en:not(:target) ~ #default-fr{display:block}
+    footer.site{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+    @media (max-width:640px){footer.site{flex-direction:column;align-items:flex-start}}
   </style>
 </head>
 <body>
-  <main class="wrap">
+  <div class="container">
     <div class="card">
-      <header>
-        <img src="LIEN_LOGO_GAUCHE" alt="Logo organisation">
-        <img src="LIEN_LOGO_DROITE" alt="Logo partenaire">
+
+      <!-- En-tête -->
+      <header class="site" role="banner">
+        <nav class="lang-switch" aria-label="Langue">
+          <a href="#fr" id="btn-fr">FR</a>
+          <a href="#en" id="btn-en">EN</a>
+        </nav>
       </header>
 
-      <div class="content">
-        <div class="grid">
-          <section>
-            <h1>Formation — Hygiène & salubrité (viandes)</h1>
-            <p>Conformément aux exigences réglementaires, ce questionnaire vérifie vos bonnes pratiques en contexte viandes (mains, séparation cru/cuit, températures, allergènes, nettoyage, traçabilité).</p>
-            <p><strong>Objectif :</strong> obtenir un score <strong>≥ 80 %</strong> pour valider la formation.</p>
-            <a class="cta" href="https://github.com/OWNER/REPO/issues/new?template=formation-hygiene-viandes.yml" target="_blank" rel="noopener">Ouvrir le questionnaire (FR)</a>
-            <p class="lang">Besoin en anglais ? Utilisez le formulaire FR pour l’instant ou demandez-moi une version EN — je te la fournis en 2 min.</p>
-          </section>
+      <!-- Titre -->
+      <section class="hero">
+        <h1>Hygiène & salubrité — Filière viandes</h1>
+        <p>Questionnaire de formation sur les bonnes pratiques (lavage des mains, séparation cru/cuit, températures, allergènes, assainissement, traçabilité).</p>
+      </section>
 
-          <section>
-            <h1>Training — Food hygiene & safety (meat)</h1>
-            <p>This quiz validates good practices for meat handling (handwashing, raw/cooked separation, temperatures, allergens, sanitation, traceability).</p>
-            <p><strong>Goal:</strong> achieve a score of <strong>≥ 80%</strong> to pass.</p>
-            <a class="cta" href="https://github.com/OWNER/REPO/issues/new?template=formation-hygiene-viandes.yml" target="_blank" rel="noopener">Open the quiz (FR)</a>
-            <p class="lang">English-only version available on request. The FR form is the reference for now.</p>
-          </section>
-        </div>
+      <!-- Contenu -->
+      <section class="panel">
+        <!-- FR -->
+        <section id="fr" class="panel-lang" lang="fr" aria-labelledby="btn-fr">
+          <h2 style="margin:0 0 6px;">Avant de commencer</h2>
+          <ul class="list">
+            <li>Répondez aux questions selon les procédures et la politique interne.</li>
+            <li>Vos réponses serviront à attester la bonne compréhension des pratiques attendues.</li>
+          </ul>
 
-        <hr style="border:none;border-top:1px solid #e5e7eb;margin:24px 0">
-      </div>
+          <!-- Remplacer FORM_URL_FR par l’URL du questionnaire -->
+          <a class="cta" href="FORM_URL_FR" target="_blank" rel="noopener">Commencer le questionnaire</a>
+        </section>
+
+        <!-- EN -->
+        <section id="en" class="panel-lang" lang="en" aria-labelledby="btn-en">
+          <h2 style="margin:0 0 6px;">Before you start</h2>
+          <ul class="list">
+            <li>Answer the questions according to internal procedures and policy.</li>
+            <li>Your responses will confirm understanding of the expected practices.</li>
+          </ul>
+
+          <!-- Replace FORM_URL_EN with your questionnaire URL -->
+          <a class="cta" href="FORM_URL_EN" target="_blank" rel="noopener">Start the questionnaire</a>
+        </section>
+
+        <!-- FR par défaut si aucune ancre -->
+        <section id="default-fr" class="panel-lang" lang="fr" aria-hidden="true">
+          <h2 style="margin:0 0 6px;">Avant de commencer</h2>
+          <ul class="list">
+            <li>Répondez aux questions selon les procédures et la politique interne.</li>
+            <li>Vos réponses serviront à attester la bonne compréhension des pratiques attendues.</li>
+          </ul>
+
+          <a class="cta" href="FORM_URL_FR" target="_blank" rel="noopener">Commencer le questionnaire</a>
+        </section>
+      </section>
+
+      <!-- Pied de page -->
+      <footer class="site" role="contentinfo">
+        <span>© <span id="year"></span> Votre organisation</span>
+        <span style="font-variant-numeric:tabular-nums">Version 1.0</span>
+      </footer>
     </div>
-  </main>
+  </div>
+
+  <script>
+    // Année + état visuel langue (sans texte superflu)
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const sync = () => {
+      const lang = (location.hash || '#fr');
+      document.querySelectorAll('.lang-switch a').forEach(a=>{
+        a.classList.toggle('active', a.getAttribute('href') === lang);
+      });
+    };
+    sync(); window.addEventListener('hashchange', sync);
+  </script>
 </body>
 </html>
